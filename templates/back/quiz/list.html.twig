@@ -1,0 +1,144 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Liste Quiz{% endblock %}
+
+{% block style %}
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('back/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('back/plugins/toastr/toastr.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <h1>Liste des Quiz</h1>
+                </div>
+                <div class="col-sm-3">
+                    <a href="{{ path('back_quiz_add') }}" class="btn btn-block btn-info" style="color:white;cursor:pointer;">Créer un Quiz</a>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Liste des Quiz</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table table-striped projects">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Titre</th>
+                            <th>Début</th>
+                            <th>Fin</th>
+                            <th>Document</th>
+                            <th>Etat</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for quiz in quizs %}
+                            <tr>
+                                <td>{{ quiz.id }}</td>
+                                <td>{{ quiz.title }}</td>
+                                <td>{{ quiz.atDate|date('d-m-Y à H:i') }}</td>
+                                <td>{{ quiz.atFinish|date('d-m-Y à H:i') }}</td>
+                                <td><div style="width:180px;height:90px;"><object data="{{ asset(constant('App\\Service\\File::DOCUMENT_UPLOAD_DIR') ~ quiz.document) }}" type="application/pdf" width="100%" height="100%"></object> </div></td>
+                                <td>
+                                    {% if (quiz.atFinish|date('Y-m-d H:i:s') > 'now'|date_modify('+2 hours')|date('Y-m-d H:i:s')) and (quiz.atDate|date('Y-m-d H:i:s') < 'now'|date_modify('+2 hours')|date('Y-m-d H:i:s')) %}
+                                        <span style="color:darkgreen">En cours</span>
+                                    {% elseif quiz.atFinish|date('Y-m-d H:i:s') > 'now'|date_modify('+2 hours')|date('Y-m-d H:i:s') %}
+                                        <span style="color:darkgrey">A venir</span>
+                                    {% else %}
+                                        <span style="color:darkred">Terminé</span>
+                                    {% endif %}
+                                </td>
+                                <td><a href="{{ path('back_participants', {'id': quiz.id}) }}" class="btn btn-secondary">Classement</a></td>
+                                <td>
+                                    <div class="row">
+                                        <a class="btn btn-info btn-sm" href="{{ path('back_quiz_edit', {'id': quiz.id}) }}">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Editer
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href=""  onclick="return confirm('Attention ! Etes-vous sûr de vouloir supprimer cette question ?');">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Supprimer
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-center"><div class="navigation">
+                    {{ knp_pagination_render(quizs) }}
+                </div></p>
+                <!-- /.card-body -->
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<!-- Bootstrap 4 -->
+<script src="{{ asset('back/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<!-- SweetAlert2 -->
+<script src="{{ asset('back/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+<!-- Toastr -->
+<script src="{{ asset('back/plugins/toastr/toastr.min.js') }}"></script>
+
+{% if app.request.get('action') == 'success' %}
+    <script type="text/javascript">
+        $(function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            Toast.fire({
+                type: 'success',
+                title: ' Evénement ajouté avec succès.'
+            });
+        });
+    </script>
+{% endif %}
+{% if app.request.get('action') == 'editsuccess' %}
+    <script type="text/javascript">
+        $(function() {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            Toast.fire({
+                type: 'info',
+                title: ' Evènement edité avec succès.'
+            });
+        });
+    </script>
+{% endif %}
+{% endblock %}

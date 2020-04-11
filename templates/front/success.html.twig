@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quiz terminé !{% endblock %}
+
+{% block body %}
+    <!-- Onview Section -->
+    <div class="container-fluid no-padding welcome-section2">
+        <!-- Container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 content-block" style="margin:auto;float:none">
+
+                    <h3>Félicitations !</h3>
+
+                    <p>Vous venez de terminer le Quiz {{ quiz.title }} sur le thème <strong>{{ quiz.theme }}</strong> !</p>
+                    <p>Vous pouvez maintenant voir le classement et vos temps dans votre espace personnel.</p>
+
+                </div>
+            </div>
+
+        </div><!-- Container /- -->
+    </div><!-- Onview Section /- -->
+    <div class="padding-50" style="margin-bottom:50px"></div>
+
+{% endblock %}

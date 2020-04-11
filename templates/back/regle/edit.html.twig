@@ -1,0 +1,46 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Modifier Section règles & modalités{% endblock %}
+
+{% block style %}
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="{{ asset('back/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Modifier Section règles & modalités</h1>
+                </div>
+                <div class="col-sm-2">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Modifier Section {{ regle.title }}</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+
+                {{ include('back/regle/form.html.twig') }}
+
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+
+{% endblock %}

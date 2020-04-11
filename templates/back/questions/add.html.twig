@@ -1,0 +1,91 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Ajout Question{% endblock %}
+
+{% block style %}
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="{{ asset('back/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Ajout d'une question</h1>
+                </div>
+                <div class="col-sm-2">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Ajout d'une question</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+
+                {{ include('back/questions/form.html.twig') }}
+
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script src="{{ asset('back/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+<script>
+    jQuery(document).ready(function () {
+        var counter;
+        jQuery('.add-another-collection-widget').click(function (e) {
+            var list = jQuery(jQuery(this).attr('data-list-selector'));
+            // Try to find the counter of the list or use the length of the list
+            var counter = list.data('widget-counter') || list.children().length;
+
+            // grab the prototype template
+            var newWidget = list.attr('data-prototype');
+            // replace the "__name__" used in the id and name of the prototype
+            // with a number that's unique to your emails
+            // end name attribute looks like name="contact[emails][2]"
+            newWidget = newWidget.replace(/__name__/g, counter);
+            newWidget = `<div id="question_responses_${counter}"><div><label for="question_responses_${counter}_response" class="required">Réponse ${counter + 1}</label><input type="text" id="question_responses_${counter}_response" name="question[responses][${counter}][response]" required="required" class="form-control" /></div><div><div class="custom-control custom-checkbox"><input type="checkbox" id="question_responses_${counter}_isGood" name="question[responses][${counter}][isGood]" required="required" class="custom-control-input" /><label class="custom-control-label required" for="question_responses_${counter}_isGood">Bonne réponse ?</label></div></div></div>`;
+            // Increase the counter
+
+            counter++;
+            // And store it, the length cannot be used if deleting widgets is allowed
+            list.data('widget-counter', counter);
+
+            // create a new list element and add it to the list
+            var newElem = jQuery(list.attr('data-widget-tags')).html(newWidget);
+            addTagFormDeleteLink(newElem);
+            newElem.appendTo(list);
+        });
+
+        function addTagFormDeleteLink($tagFormLi) {
+            var $removeFormButton = $('<button type="button" class="btn btn-block btn-danger btn-sm col-md-12 mt-3">Supprimer cette réponse</button>');
+            $tagFormLi.append($removeFormButton);
+
+            $removeFormButton.on('click', function(e) {
+                // remove the li for the tag form
+                counter--;
+
+                $tagFormLi.remove();
+            });
+        }
+    });
+</script>
+{% endblock %}

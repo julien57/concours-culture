@@ -1,0 +1,113 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Liste Questions{% endblock %}
+
+{% block style %}
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('back/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{ asset('back/plugins/toastr/toastr.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <h1>Dashboard</h1>
+                </div>
+                <div class="col-sm-3">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Dernier Quiz</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i></button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                                    <i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            {% if quizPassed %}
+                                <ul>
+                                    <li>Quiz : {{ quizPassed.title }}</li>
+                                    <li>Thème : {{ quizPassed.title }}</li>
+                                    <li>Terminé le : {{ quizPassed.atFinish|date('d/m/Y à H:i') }}</li>
+                                    <li>Nombre questions : {{ quizPassed.questions|length }}</li>
+                                    <li>Nombre participants : {{ time_quiz.positionUserPerQuiz(quizPassed.id)|length }}</li>
+                                    <li><a href="{{ path('back_participants', {'id': quizPassed.id}) }}" class="btn btn-secondary">Voir le Classement</a></li>
+                                </ul>
+                            {% else %}
+                                <p style="color:darkred">Aucun Quiz terminé</p>
+                            {% endif %}
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Quiz en cours</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i></button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                                    <i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                                {% if concoursInCurse %}
+                                    <li>Quiz : {{ concoursInCurse.title }}</li>
+                                    <li>Thème : {{ concoursInCurse.title }}</li>
+                                    <li>Termine à : {{ concoursInCurse.atFinish|date('H:i') }}</li>
+                                    <li>Nombre questions : {{ concoursInCurse.questions|length }}</li>
+                                    <li>Nombre participants : {{ time_quiz.positionUserPerQuiz(concoursInCurse.id)|length }} (pour le moment)</li>
+                                    <li><a href="{{ path('back_participants', {'id': concoursInCurse.id}) }}" class="btn btn-secondary">Voir le Classement</a></li>
+                                {% else %}
+                                    <p style="color:darkred">Aucun Quiz en cours</p>
+                                {% endif %}
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Prochain Quiz</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                                    <i class="fas fa-minus"></i></button>
+                                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                                    <i class="fas fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                                {% if nextQuiz %}
+                                    <li>Quiz : {{ nextQuiz.title }}</li>
+                                    <li>Thème : {{ nextQuiz.title }}</li>
+                                    <li>Termine à : {{ nextQuiz.atFinish|date('H:i') }}</li>
+                                    <li>Nombre questions : {{ nextQuiz.questions|length }}</li>
+                                {% else %}
+                                    <p style="color:darkred">Aucun Quiz à venir.</p>
+                                {% endif %}
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+
+{% endblock %}

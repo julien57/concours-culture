@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Quiz{% endblock %}
+
+{% block body %}
+
+    <!-- Onview Section -->
+    <div class="container-fluid no-padding welcome-section2">
+        <!-- Container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 content-block" style="margin:auto;float:none">
+
+                    <h2>Mon Espace</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4 style="margin-bottom:30px">Mes participations aux Quiz</h4>
+                            {% for quiz in quizs %}
+                                <div class="modal fade" id="{{ quiz.theme }}{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Classement <strong>{{ quiz.title }}</strong></h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">Position</th>
+                                                        <th scope="col">Nom</th>
+                                                        <th scope="col">Bonnes réponses</th>
+                                                        <th scope="col">Temps</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for user in time_quiz.positionUserPerQuiz(quiz.id) %}
+                                                        <tr {% if user == app.user %}style="background:rgba(226,177,60,0.5);"{% endif %}>
+                                                            <th scope="row">{{ loop.index }}</th>
+                                                            <td>{{user.name}}</td>
+                                                            {% set nbGoodResponses = time_quiz.getGoodResults(user, quiz.id) %}
+                                                            <td>{{ nbGoodResponses }}</td>
+                                                            <td>{{ time_quiz.getTimeQuizWithCountResponses(user, quiz.id).time }}</td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 no-padding event-block">
+                                    <div class="col-md-12 col-sm-12 col-xs-12 event-content">
+                                        <div class="post-date" style="width:130px">
+                                            <span>{{ quiz.atDate|date('d/m/Y') }}</span>
+                                        </div>
+                                        <h3>{{ quiz.title }}</h3>
+                                        <h4><a href="" title="London"><i class="fa fa-thumb-tack"></i>{{ quiz.theme }}</a> <a href=""><i class="fa fa-clock-o"></i>{{ quiz.atDate|date('H:i') }} - {{ quiz.atFinish|date('H:i') }} - {% if quiz.atFinish|date('Y-m-d H:i:s') > 'now'|date_modify('+2 hours')|date('Y-m-d H:i:s') %}<span style="color:darkgreen">Toujours en cours</span>{% else %}<span style="color:darkred">Terminé</span>{% endif %}</a></h4>
+                                        <p>Vous avez répondu à {{ time_quiz.getTimeQuizWithCountResponses(app.user, quiz.id).nbResponses }} questions en <strong>{{ time_quiz.getTimeQuizWithCountResponses(app.user, quiz.id).time }}</strong>.</p>
+                                        {% set nbGoodResponses = time_quiz.getGoodResults(app.user, quiz.id) %}
+                                        <p>Sur ce quiz, vous avez répondu à <strong>{{ (nbGoodResponses > 1) ? nbGoodResponses ~ ' bonnes réponses' : nbGoodResponses ~ ' bonne réponse' }}</strong>.</p>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ quiz.theme }}{{ loop.index }}">
+                                            Voir le classement
+                                        </button>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <p>Vous n'avez participez à aucun Quiz pour le moment.</p>
+                            {% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            <h4 style="margin-bottom:30px">Mes informations</h4>
+                            {% for message in app.flashes('notice') %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            <div class="col-md-12" style="display:flex;justify-content:center">
+                                <div class="col-md-8 form-infos" style="background:rgba(226,177,60,0.7);padding:25px 40px;border-radius:5px">
+                                    {{ form_start(form) }}
+                                    <label style="color:white">Nom * :</label>
+                                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(form.name) }}
+                                    <div style="margin-top:30px"></div>
+                                    <label style="color:white">Adresse mail * :</label>
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(form.email) }}
+                                    <button class="btn btn-warning" type="submit" style="margin-top:30px;">Enregistrer</button>
+                                    {{ form_end(form) }}
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div><!-- Container /- -->
+    </div><!-- Onview Section /- -->
+    <div class="padding-50" style="margin-bottom:50px"></div>
+
+{% endblock %}

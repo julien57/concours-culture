@@ -1,0 +1,73 @@
+{{ form_start(form) }}
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+                    <small>{{ form_errors(form.title) }}</small>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_label(form.atDate) }}
+                            {{ form_widget(form.atDate, {'attr': {'class': 'form-control', 'autocomplete': 'off'}}) }}
+                            <small>{{ form_errors(form.atDate) }}</small>
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_label(form.atFinish) }}
+                            {{ form_widget(form.atFinish, {'attr': {'class': 'form-control', 'autocomplete': 'off'}}) }}
+                            <small>{{ form_errors(form.atFinish) }}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                        {{ form_label(form.theme) }}
+                        {{ form_widget(form.theme, {'attr': {'class': 'form-control'}}) }}
+                        <small>{{ form_errors(form.theme) }}</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.questions) }}
+                    {% for question in form.questions %}
+                        <div class="custom-control custom-checkbox">
+                            {{ form_widget(question, {'attr': {'class': 'form-control-input'}}) }}
+                            {{ form_label(question, '', {'label_attr': {'class': 'form-control-label'}}) }}
+                        </div>
+                    {% endfor %}
+                    <small>{{ form_errors(form.questions) }}</small>
+
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="">Document d'apprentissage</label>
+                    <div class="input-group">
+                        {% if quiz.document %}
+                            <p>Preview du document</p>
+                            <div style="width:100%;height:200px;"><object data="{{ asset(constant('App\\Service\\File::DOCUMENT_UPLOAD_DIR') ~ quiz.document) }}" type="application/pdf" width="100%" height="100%"></object> </div>
+                        {% endif %}
+                        {% if quiz.document %}<p style="width:100%" class="mt-3">Modifier le document :</p>{% endif %}
+                        <div class="custom-file">
+                            {{ form_widget(form.document) }}
+                            {{ form_label(form.document) }}
+                        </div>
+                    </div>
+                    <small>{{ form_errors(form.document) }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.card-body -->
+
+    <div class="card-footer">
+        <div class="float-left">
+            <a href="{{ path('back_quiz_list') }}" class="btn btn-secondary">Retour</a>
+        </div>
+        <div class="float-right">
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+
+    </div>
+{{ form_end(form) }}

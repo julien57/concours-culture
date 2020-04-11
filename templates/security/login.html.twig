@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Mot de passe oublié</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{ path('front_forgot_password') }}" id="formForgot">
+                        <label for="forgot">Votre adresse mail :</label>
+                        <input type="email" name="forgot" class="form-control" id="forgot">
+                        <input type="hidden" name="token" value="{{ csrf_token('forgot-pwd') }}"/>
+                        <div id="responseForgot"></div>
+                        <button id="btn_submit" type="submit" class="download-file btn-concours forgot_btn">Se connecter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Onview Section -->
+    <div class="container-fluid no-padding contact-section">
+        <!-- Container -->
+        <div class="container">
+            <div class="row" style="display:flex">
+                <div class="col-md-6" style="border-right:1px solid grey">
+                    {% for message in app.flashes('notice') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="contact-form">
+                        <h3>Inscription</h3>
+                        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+                            <div class="row">
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <small style="color:red">{{ form_errors(form.name) }}</small>
+                                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                                    <small style="color:red">{{ form_errors(form.password.first) }}</small>
+                                    {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <small style="color:red">{{ form_errors(form.email) }}</small>
+                                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                    <small style="color:red">{{ form_errors(form.password.second) }}</small>
+                                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+                                    <button id="btn_submit" type="submit" title="Send Your Message">S'inscrire</button>
+                                </div>
+                            </div>
+                            <div class="alert-msg" id="alert-msg"></div>
+                        {{ form_rest(form) }}
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+                <div class="col-md-6" style="float:none">
+                    <div class="contact-form">
+                        <h3>Connexion</h3>
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <form method="post">
+                            <div class="col-md-6" style="float:none; margin:auto">
+                                <div class="form-group">
+                                    <input type="email" name="email" id="input_fname" required="" placeholder="Mail" class="form-control">
+                                    <input type="password" name="password" id="input_lname" required="" placeholder="Mot de passe" class="form-control">
+                                    <button id="btn_submit" type="submit" title="Send Your Message">Se connecter</button>
+                                </div>
+                                <a href="" data-toggle="modal" data-target="#exampleModal" style="color:#e2b13c">
+                                    Mot de passe oublié ?
+                                </a>
+                            </div>
+                            <input type="hidden" name="_csrf_token_auth"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+                            <div class="alert-msg" id="alert-msg"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div><!-- Container /- -->
+    </div><!-- Onview Section /- -->
+    <div class="padding-50"></div>
+
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script>
+$("form#formForgot").submit(function(e) {
+    e.preventDefault();
+    $.ajax({
+           type: "POST",
+           data: $(this).serialize(),
+           url: $(this).attr("action"),
+           success: function(data){
+                $('#responseForgot').css('color', data.color);
+                $('#responseForgot').html(data.message);
+                $('.forgot_btn').prop('disabled', true);
+
+                setTimeout(hideModal, 2000);
+
+                function hideModal() {
+                    $('#exampleModal').modal('hide')
+                }
+           }
+    });
+return false;
+ });
+</script>
+{% endblock %}

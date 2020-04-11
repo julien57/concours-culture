@@ -1,0 +1,36 @@
+<footer class="footer-main container-fluid no-padding">
+    <!-- Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-6 col-xs-6">
+                <!-- Widget About -->
+                <aside class="ftr-widget widget_about">
+                    <a title="Logo" href="{{ path('home') }}" class="navbar-brand" style="color:#e2b13c;font-size:2.5em"><span style="text-transform:uppercase;font-weight:bold">C</span>oncours<span style="text-transform:uppercase;font-weight:bold">C</span>ulture</a>
+                    <p>Participez à des Quiz gratuitement ! Merci de partager le site sur les réseaux sociaux :</p>
+                    <div class="fb-share-button" data-href="https://www.concoursculture.com" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.concoursculture.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+                </aside><!-- Widget About /- -->
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+
+            </div>
+            <div class="col-md-2 col-sm-6 col-xs-6">
+
+            </div>
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <!-- Widget Link -->
+                <aside class="ftr-widget widget_link">
+                    <h3 class="widget-title">Raccourcis</h3>
+                    <ul>
+                        <li><a href="{{ path('front_next_concours') }}" title="Prochain concours">Prochain concours</a></li>
+                        <li><a href="{{ path('front_contact') }}" title="contactez-nous">Contact</a></li>
+                    </ul>
+                </aside><!-- Widget Link /- -->
+            </div>
+        </div>
+    </div><!-- Container /- -->
+
+    <!-- Copyright -->
+    <div class="container-fluid no-padding copyright">
+        <p>copyrights <i class="fa fa-copyright"></i> {{ 'now'|date('Y') }}. Tous droit réservés</p>
+    </div><!-- Copyright /- -->
+</footer><!-- Footer Section /- -->

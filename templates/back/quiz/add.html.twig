@@ -1,0 +1,165 @@
+{% extends 'base_back.html.twig' %}
+
+{% block title %}Ajout Quiz{% endblock %}
+
+{% block style %}
+    <!-- Bootstrap Color Picker -->
+    <link rel="stylesheet" href="{{ asset('back/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('back/plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css') }}">
+{% endblock %}
+
+{% block body %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Ajout d'un Quiz</h1>
+                </div>
+                <div class="col-sm-2">
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Ajout d'un Quiz</h3>
+                    {% for message in app.flashes('notice') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                            <i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+
+                {{ include('back/quiz/form.html.twig') }}
+
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+
+{% endblock %}
+
+{% block javascript %}
+{{ parent() }}
+<script src="{{ asset('back/plugins/select2/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('back/plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js') }}"></script>
+<script>
+$('.duallistbox').bootstrapDualListbox()
+</script>
+<script>
+    $(function() {
+        $('input[name="quiz[atDate]"]').daterangepicker({
+            autoUpdateInput: false,
+            linkedCalendars: false,
+            timePicker: true,
+            timePicker24Hour: true,
+            singleDatePicker: true,
+            locale: {
+                format: "DD-MM-YYYY HH:mm",
+                showCustomRangeLabel: false,
+                separator: " - ",
+                applyLabel: "Valider",
+                cancelLabel: "Annuler",
+                fromLabel: "De",
+                toLabel: "à",
+                customRangeLabel: "Custom",
+                daysOfWeek: [
+                    "Dim",
+                    "Lun",
+                    "Mar",
+                    "Mer",
+                    "Jeu",
+                    "Ven",
+                    "Sam"
+                ],
+                monthNames: [
+                    "Janvier",
+                    "Février",
+                    "Mars",
+                    "Avril",
+                    "Mai",
+                    "Juin",
+                    "Juillet",
+                    "Août",
+                    "Septembre",
+                    "Octobre",
+                    "Novembre",
+                    "Décembre"
+                ],
+                firstDay: 1
+            }
+        });
+        $('input[name="quiz[atDate]"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD-MM-YYYY HH:mm'));
+        });
+        $('input[name="quiz[atDate]"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+    });$(function() {
+        $('input[name="quiz[atFinish]"]').daterangepicker({
+            autoUpdateInput: false,
+            linkedCalendars: false,
+            timePicker: true,
+            timePicker24Hour: true,
+            singleDatePicker: true,
+            locale: {
+                format: "DD-MM-YYYY HH:mm",
+                showCustomRangeLabel: false,
+                separator: " - ",
+                applyLabel: "Valider",
+                cancelLabel: "Annuler",
+                fromLabel: "De",
+                toLabel: "à",
+                customRangeLabel: "Custom",
+                daysOfWeek: [
+                    "Dim",
+                    "Lun",
+                    "Mar",
+                    "Mer",
+                    "Jeu",
+                    "Ven",
+                    "Sam"
+                ],
+                monthNames: [
+                    "Janvier",
+                    "Février",
+                    "Mars",
+                    "Avril",
+                    "Mai",
+                    "Juin",
+                    "Juillet",
+                    "Août",
+                    "Septembre",
+                    "Octobre",
+                    "Novembre",
+                    "Décembre"
+                ],
+                firstDay: 1
+            }
+        });
+        $('input[name="quiz[atFinish]"]').on('apply.daterangepicker', function(ev, picker) {
+            $(this).val(picker.startDate.format('DD-MM-YYYY HH:mm'));
+        });
+        $('input[name="quiz[atFinish]"]').on('cancel.daterangepicker', function(ev, picker) {
+            $(this).val('');
+        });
+    });
+    $('#quiz_document').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    })
+</script>
+{% endblock %}

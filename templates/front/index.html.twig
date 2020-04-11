@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Concours-Culture{% endblock %}
+
+{% block body %}
+
+    <!-- Onview Section -->
+    <div class="container-fluid no-padding onview-section">
+        <!-- Container -->
+        <div class="container">
+            <div class="col-md-5 col-sm-5 col-xs-12 img-block">
+                <img src="{{ asset('front/images/chevaux-marly.png') }}" alt="onview" />
+            </div>
+            <div class="col-md-7 col-sm-7 col-xs-12 onview-content">
+                <!-- Section Header -->
+                <div class="section-header">
+                    <div class="section-title-border">
+                        <span>ConcoursCulture</span>
+                        <h2>Présentation</h2>
+                    </div>
+                </div><!-- Section Header /- -->
+                <p>ConcoursCulture vous propose des concours de culture générale sous forme de questionnaires. Le gagnant d’un concours remporte le prix mis en jeu. En vue d’une stricte égalité des chances, le thème du concours ainsi qu’un bref document d’apprentissage est mis à disposition avant le concours.
+                <br>Parmi nos thèmes :
+                </p>
+                <ul>
+                    {% for theme in themes %}
+                        <li class="col-md-4 col-sm-6 col-xs-6">{{ theme.theme }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div><!-- Container /- -->
+    </div><!-- Onview Section /- -->
+    <div class="padding-50"></div>
+
+    <div class="container">
+        <div class="contact-info">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <i><img src="{{ asset('front/images/particulier.svg') }}" alt="Particulier" style="height:50px"></i>
+                <h3>Vous êtes un particulier</h3>
+                <p>Aidez-nous financièrement !
+                    Afin de motiver les gens à développer leur culture générale, nous offrons des prix aux gagnants. Mais cela a un coût !<br>
+                    <span>Lien en cours de création</span>
+                </p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <i><img src="{{ asset('front/images/entreprise.svg') }}" alt="Entreprise" style="height:50px"></i>
+                <h3>Vous êtes une entreprise</h3>
+                <p>Aidez-nous matériellement !
+                    Si vous désirez faire la promotion d’un produit, vous pouvez le proposer comme prix d’un de nos concours, quelle qu’en soit sa valeur.<br>
+                    <a href="{{ path('front_contact') }}" class="download-file btn-concours">Nous contacter</a>
+                </p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <i><img src="{{ asset('front/images/passion.svg') }}" alt="Passionné" style="height:50px"></i>
+                <h3>Vous êtes un passionné</h3>
+                <p>Aidez-nous avec vos compétences !
+                    Si vous êtes un professionnel ou un simple passionné, n’hésitez pas à nous proposer vos compétences pour élaborer nos concours.<br>
+                    <a href="{{ path('front_contact') }}" class="download-file btn-concours">Nous contacter</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="padding-50 mt-5"></div>
+
+    <div class="container-fluid no-padding upcoming-event">
+        <div class="container-fluid no-padding" style="width:100%;height:100%;background:rgba(255,255,255,0.5)">
+        <div class="section-padding"></div>
+        <!-- Container -->
+        <div class="container">
+            <!-- Section Header -->
+            <div class="section-header">
+                <div class="section-title-border">
+                    <span>Explications</span>
+                    <h2>Comment ça marche</h2>
+                </div>
+            </div><!-- Section Header /- -->
+            <div class="col-md-8 col-sm-12 col-xs-12 no-padding">
+                <!-- Event Block -->
+                <div class="col-md-12 col-sm-12 col-xs-12 no-padding event-block">
+                    <div class="col-md-12 col-sm-12 col-xs-12 event-content">
+                        <div class="post-date">
+                            <span>Etape</span>
+                            <span>1</span>
+                        </div>
+                        <p>Concours-Culture vous donne rendez-vous pour un concours à une date précise.</p>
+                    </div>
+                </div>
+                <!-- Event Block -->
+                <div class="col-md-12 col-sm-12 col-xs-12 no-padding event-block">
+                    <div class="col-md-12 col-sm-12 col-xs-12 event-content">
+                        <div class="post-date">
+                            <span>Etape</span>
+                            <span>2</span>
+                        </div>
+                        <p>Vous pouvez préparer ce concours avec le document mis à disposition.</p>
+                    </div>
+                </div>
+                <!-- Event Block -->
+                <div class="col-md-12 col-sm-12 col-xs-12 no-padding event-block">
+                    <div class="col-md-12 col-sm-12 col-xs-12 event-content">
+                        <div class="post-date">
+                            <span>Etape</span>
+                            <span>3</span>
+                        </div>
+                        <p>A la date annoncée, tous les participants répondent aux questions.</p>
+                    </div>
+                </div>
+                <!-- Event Block -->
+                <div class="col-md-12 col-sm-12 col-xs-12 no-padding event-block">
+                    <div class="col-md-12 col-sm-12 col-xs-12 event-content">
+                        <div class="post-date">
+                            <span>Etape</span>
+                            <span>4</span>
+                        </div>
+                        <p>Le gagnant est celui qui a le plus de bonnes réponses. Il remporte le prix.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div><!-- Container /- -->
+
+        <div class="section-padding" style="background:rgba(255,255,255,0.5)"></div>
+    </div><!-- Upcoming Events /- -->
+
+{% endblock %}
