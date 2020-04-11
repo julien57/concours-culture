@@ -37,10 +37,10 @@
                         </div>
                     {% endfor %}
                     <div class="contact-form">
-                        <p style="text-align: justify;text-transform: initial;font-size:0.9em">L’inscription à ConcoursCulture et la participation aux
+                        <h3>Inscription</h3>
+                        <p style="text-align:justify;text-transform: initial;font-size:0.9em;font-family:'PT Serif', serif">L’inscription à ConcoursCulture et la participation aux
                             concours sont entièrement gratuites. Concours-Culture est une initiative citoyenne,
                             destinée à la promotion de la culture générale. </p>
-                        <h3>Inscription</h3>
                         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                             <div class="row">
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
@@ -50,10 +50,10 @@
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <small style="color:red">{{ form_errors(form.email) }}</small>
                                     {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                                    <button id="btn_submit" type="submit" title="Send Your Message">S'inscrire</button>
+                                    <button id="btn_submit" type="submit" title="S'inscrire">S'inscrire</button>
                                 </div>
-                                <small style="text-align: justify">Conformément à la loi
-                                    "informatique et libertés" du 6 janvier 1978, vous bénéficiez d'un droit d'accès, de rectification, de modification et de suppression des informations qui vous concernent. Si vous souhaitez exercer ce droit, Cliquez ici.</small>
+                                <small style="text-align:justify">Conformément à la loi
+                                    "informatique et libertés" du 6 janvier 1978, vous bénéficiez d'un droit d'accès, de rectification, de modification et de suppression des informations qui vous concernent. Si vous souhaitez exercer ce droit, contactez-nous.</small>
                             </div>
                             <div class="alert-msg" id="alert-msg"></div>
                         {{ form_rest(form) }}

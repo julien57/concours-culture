@@ -56,7 +56,7 @@
                                 </li>
                             </ul>
 
-                            <p>Le prochain concours sera sur le thème <strong>{{ nextConcours.theme }}</strong>. Pour vous y préparer, vous pouvez télécharger le document suivant. Chacune des réponses demandées se trouve dans le document, ou dans les références auxquelles il renvoie.</p>
+                            <p>Le prochain concours sera sur le suivant : <strong>{{ nextConcours.title }}</strong>. Pour vous y préparer, vous pouvez télécharger le document suivant. Chacune des réponses demandées se trouve dans le document, ou dans les références auxquelles il renvoie.</p>
                             <p>Avant de participer au concours, merci de prendre connaissance des <a data-toggle="modal" data-target=".bd-example-modal-lg" style="cursor:pointer">règles et modalités</a>.</p>
                             {% if app.user %}
                                 <a href="{{ asset(constant('App\\Service\\File::DOCUMENT_UPLOAD_DIR') ~ nextConcours.document) }}" target="_blank" class="download-file">Télécharger le document</a>

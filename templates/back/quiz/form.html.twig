@@ -36,10 +36,11 @@
                         </div>
                     {% endfor %}
                     <small>{{ form_errors(form.questions) }}</small>
-
                 </div>
             </div>
+
             <div class="col-md-2"></div>
+
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="">Document d'apprentissage</label>
@@ -55,6 +56,13 @@
                         </div>
                     </div>
                     <small>{{ form_errors(form.document) }}</small>
+                </div>
+                <div class="form-group">
+                    <label class="">Choisir un prix (facultatif)</label>
+                    <div class="input-group">
+                        {{ form_widget(form.gift, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <small>{{ form_errors(form.gift) }}</small>
                 </div>
             </div>
         </div>

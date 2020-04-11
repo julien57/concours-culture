@@ -49,6 +49,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ path('back_gift_list') }}" class="nav-link {% if app.request.get('_route') == 'back_gift_list' %}active{% endif %}">
+                        <i class="nav-icon far fa-heart"></i>
+                        <p>
+                            Prix
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <nav class="mt-2">

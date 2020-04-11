@@ -33,6 +33,22 @@ class QuizRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function nextConcoursWithGift()
+    {
+        $dateNow = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $dateNow->format('Y-m-d H:i');
+
+        return $this->createQueryBuilder('q')
+            ->leftJoin('q.gift', 'gift')
+            ->addSelect('gift')
+            ->where('q.atDate > :now')
+            ->setParameter('now', $dateNow)
+            ->orderBy('q.atDate', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     public function concoursInCurse()
     {
         $dateNow = new \DateTime('now', new \DateTimeZone('Europe/Paris'));

@@ -54,13 +54,6 @@ class QuizController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $startAt = $quiz->getAtDate();
-            $startAt->setTimezone(new \DateTimeZone('Europe/Paris'));
-            $endAt = $quiz->getAtFinish();
-            $endAt->setTimezone(new \DateTimeZone('Europe/Paris'));
-
-            $quiz->setAtDate($startAt);
-            $quiz->setAtFinish($endAt);
             $documentName = $file->uploadFile($quiz->getDocument());
             if (!$documentName) {
                 $this->addFlash('danger', 'Erreur lors du chargement du document.');
@@ -106,6 +99,7 @@ class QuizController extends AbstractController
                 }
                 $quiz->setDocument($documentName);
             }
+
 
             /** @var Question $question */
             foreach ($form->get('questions')->getData() as $question) {

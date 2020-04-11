@@ -9,6 +9,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class File
 {
     const DOCUMENT_UPLOAD_DIR = 'concours/documents/';
+    const PHOTO_GIFT_UPLOAD_DIR = 'concours/prix/';
 
     /**
      * @var SluggerInterface
@@ -31,6 +32,26 @@ class File
         try {
             $file->move(
                 self::DOCUMENT_UPLOAD_DIR,
+                $newFilename
+            );
+        } catch (FileException $e) {
+            return null;
+        }
+
+        return $newFilename;
+    }
+
+    public function uploadPhotoGift(UploadedFile $file)
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        // this is needed to safely include the file name as part of the URL
+        $safeFilename = $this->slugger->slug($originalFilename);
+        $newFilename = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+
+        // Move the file to the directory where brochures are stored
+        try {
+            $file->move(
+                self::PHOTO_GIFT_UPLOAD_DIR,
                 $newFilename
             );
         } catch (FileException $e) {

@@ -60,7 +60,7 @@
                                             <span>{{ quiz.atDate|date('d/m/Y') }}</span>
                                         </div>
                                         <h3>{{ quiz.title }}</h3>
-                                        <h4><a href="" title="London"><i class="fa fa-thumb-tack"></i>{{ quiz.theme }}</a> <a href=""><i class="fa fa-clock-o"></i>{{ quiz.atDate|date('H:i') }} - {{ quiz.atFinish|date('H:i') }} - {% if quiz.atFinish|date('Y-m-d H:i:s') > 'now'|date_modify('+2 hours')|date('Y-m-d H:i:s') %}<span style="color:darkgreen">Toujours en cours</span>{% else %}<span style="color:darkred">Terminé</span>{% endif %}</a></h4>
+                                        <h4><i class="fa fa-thumb-tack" style="color:#e2b13c;margin-left:15px;margin-right:3px"></i>{{ quiz.theme }} <i class="fa fa-clock-o" style="color:#e2b13c;margin-left:15px;margin-right:3px"></i>{{ quiz.atDate|date('H:i') }} - {{ quiz.atFinish|date('H:i') }} | {% if quiz.atFinish|date('Y-m-d H:i:s') > 'now'|date_modify('+2 hours')|date('Y-m-d H:i:s') %}<span style="color:darkgreen">Toujours en cours</span>{% else %}<span style="color:darkred">Terminé</span>{% endif %}</h4>
                                         <p>Vous avez répondu à {{ time_quiz.getTimeQuizWithCountResponses(app.user, quiz.id).nbResponses }} questions en <strong>{{ time_quiz.getTimeQuizWithCountResponses(app.user, quiz.id).time }}</strong>.</p>
                                         {% set nbGoodResponses = time_quiz.getGoodResults(app.user, quiz.id) %}
                                         <p>Sur ce quiz, vous avez répondu à <strong>{{ (nbGoodResponses > 1) ? nbGoodResponses ~ ' bonnes réponses' : nbGoodResponses ~ ' bonne réponse' }}</strong>.</p>
@@ -87,9 +87,6 @@
                                     {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
                                     {{ form_errors(form.name) }}
                                     <div style="margin-top:30px"></div>
-                                    <label style="color:white">Adresse mail * :</label>
-                                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                                    {{ form_errors(form.email) }}
                                     <div style="margin-top:30px"></div>
                                     <label style="color:white">Nouveau mot de passe :</label>
                                     {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}

@@ -53,6 +53,11 @@ class Quiz
      */
     private $results;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Gift")
+     */
+    private $gift;
+
     public function __construct()
     {
         $this->questions = new ArrayCollection();
@@ -183,6 +188,18 @@ class Quiz
                 $result->setQuiz(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getGift(): ?Gift
+    {
+        return $this->gift;
+    }
+
+    public function setGift(?Gift $gift): self
+    {
+        $this->gift = $gift;
 
         return $this;
     }

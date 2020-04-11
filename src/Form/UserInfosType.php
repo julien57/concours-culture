@@ -16,12 +16,6 @@ class UserInfosType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class, [
-                'label' => false,
-                'attr' => [
-                    'placeholder' => 'Adresse mail *'
-                ]
-            ])
             ->add('name', TextType::class, [
                 'label' => false,
                 'attr' => [

@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Gift;
 use App\Entity\Question;
 use App\Entity\Quiz;
 use App\Repository\QuestionRepository;
@@ -69,6 +70,14 @@ class QuizType extends AbstractType
                 'choice_label' => 'question',
                 'multiple' => true,
                 'expanded' => true
+            ])
+            ->add('gift', EntityType::class, [
+                'class' => Gift::class,
+                'placeholder' => 'Prix',
+                'required' => false,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false
             ])
         ;
     }

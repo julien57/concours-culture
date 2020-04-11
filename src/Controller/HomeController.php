@@ -35,10 +35,12 @@ class HomeController extends AbstractController
     public function index(QuizRepository $quizRepository)
     {
         $themes = $quizRepository->getByTheme();
+        $nextConcours = $quizRepository->nextConcoursWithGift();
 
         return $this->render('front/index.html.twig', [
             'controller_name' => 'HomeController',
-            'themes' => $themes
+            'themes' => $themes,
+            'nextConcours' => $nextConcours
         ]);
     }
 
