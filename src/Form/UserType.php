@@ -28,14 +28,6 @@ class UserType extends AbstractType
                     'placeholder' => 'Nom *'
                 ]
             ])
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'invalid_message' => 'Les champs doivent être identiques.',
-                'options' => ['attr' => ['class' => 'password-field']],
-                'first_options'  => ['attr' => ['placeholder' => 'Mot de passe *']],
-                'second_options' => ['attr' => ['placeholder' => 'Répétez mot de passe *']],
-                'empty_data' => ''
-            ])
         ;
     }
 

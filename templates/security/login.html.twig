@@ -29,7 +29,7 @@
     <div class="container-fluid no-padding contact-section">
         <!-- Container -->
         <div class="container">
-            <div class="row" style="display:flex">
+            <div class="row" style="display:flex;flex-wrap:wrap">
                 <div class="col-md-6" style="border-right:1px solid grey">
                     {% for message in app.flashes('notice') %}
                         <div class="alert alert-success">
@@ -37,22 +37,23 @@
                         </div>
                     {% endfor %}
                     <div class="contact-form">
+                        <p style="text-align: justify;text-transform: initial;font-size:0.9em">L’inscription à ConcoursCulture et la participation aux
+                            concours sont entièrement gratuites. Concours-Culture est une initiative citoyenne,
+                            destinée à la promotion de la culture générale. </p>
                         <h3>Inscription</h3>
                         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                             <div class="row">
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <small style="color:red">{{ form_errors(form.name) }}</small>
                                     {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                                    <small style="color:red">{{ form_errors(form.password.first) }}</small>
-                                    {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <small style="color:red">{{ form_errors(form.email) }}</small>
                                     {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                                    <small style="color:red">{{ form_errors(form.password.second) }}</small>
-                                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
                                     <button id="btn_submit" type="submit" title="Send Your Message">S'inscrire</button>
                                 </div>
+                                <small style="text-align: justify">Conformément à la loi
+                                    "informatique et libertés" du 6 janvier 1978, vous bénéficiez d'un droit d'accès, de rectification, de modification et de suppression des informations qui vous concernent. Si vous souhaitez exercer ce droit, Cliquez ici.</small>
                             </div>
                             <div class="alert-msg" id="alert-msg"></div>
                         {{ form_rest(form) }}

@@ -56,12 +56,11 @@
                                 </li>
                             </ul>
 
-                            <p>Le prochain concours sera sur le thème <strong>{{ nextConcours.theme }}</strong>. Pour vous y préparer, vous pouvez télécharger le document suivant. Chacune des réponses demandées se trouve dans le document, ou dans les références auxquels il renvoie.</p>
+                            <p>Le prochain concours sera sur le thème <strong>{{ nextConcours.theme }}</strong>. Pour vous y préparer, vous pouvez télécharger le document suivant. Chacune des réponses demandées se trouve dans le document, ou dans les références auxquelles il renvoie.</p>
                             <p>Avant de participer au concours, merci de prendre connaissance des <a data-toggle="modal" data-target=".bd-example-modal-lg" style="cursor:pointer">règles et modalités</a>.</p>
                             {% if app.user %}
-                                <a href="{{ asset(constant('App\\Service\\File::DOCUMENT_UPLOAD_DIR') ~ nextConcours.document) }}" target="_blank" class="download-file">Télécharger</a>
+                                <a href="{{ asset(constant('App\\Service\\File::DOCUMENT_UPLOAD_DIR') ~ nextConcours.document) }}" target="_blank" class="download-file">Télécharger le document</a>
                             {% else %}
-                                <p>Pour télécharger ce document, vous devez créer gratuitement un compte. La participation au concours sera également gratuite. Concours-Culture est une initiative entièrement gratuite et citoyenne, destinée à la promotion de la culture générale. </p>
                                 {% if app.user %}
                                     <a href="{{ path('front_security_login') }}" class="download-file btn-concours">Télécharger le document</a>
                                 {% else %}
@@ -69,7 +68,7 @@
                                 {% endif %}
                             {% endif %}
                         {% else %}
-                            <p>Aucun concours de prévu pour le moment. Merci de repasser très prochainement...</p>
+                            <p>Aucun concours prévu pour le moment. Merci de repasser très prochainement...</p>
                         {% endif %}
 
                     {% else %}
@@ -81,6 +80,7 @@
                         </div>
                             {% if concoursInCurse is not null %}
                                 <p>Le concours qui est en train de se dérouler est sur le thème <strong>{{ concoursInCurse.theme }}</strong>.<br>
+                                    Pour vous y préparer, vous pouvez télécharger le document suivant. Chacune des réponses demandées se trouve dans le document, ou dans les références auxquelles il renvoie.<br>
                                 Avant de participer au concours, merci de prendre connaissance des <a data-toggle="modal" data-target=".bd-example-modal-lg" style="cursor:pointer">règles et modalités</a>.</p>
                                 <div class="row">
                                     {% if app.user %}
@@ -88,7 +88,7 @@
                                             <p>Vous avez déjà participé à ce Quiz.</p>
                                         {% else %}
                                         <div class="col-md-6">
-                                            <a href="{{ asset(constant('App\\Service\\File::DOCUMENT_UPLOAD_DIR') ~ concoursInCurse.document) }}" target="_blank" class="download-file btn-concours" style="padding-left:26px">Télécharger</a>
+                                            <a href="{{ asset(constant('App\\Service\\File::DOCUMENT_UPLOAD_DIR') ~ concoursInCurse.document) }}" target="_blank" class="download-file btn-concours" style="padding-left:26px">Télécharger le document</a>
                                         </div>
                                         <div class="col-md-6">
                                             <a href="{{ path('front_start_quiz', {'id': concoursInCurse.id}) }}" class="download-file btn-concours" style="padding-left:26px">Démarrer le Quiz</a>
@@ -96,7 +96,7 @@
                                         {% endif %}
                                      {% else %}
                                          <div class="col-md-6">
-                                             <a href="{{ path('front_security_login') }}" class="download-file btn-concours" style="padding-left:26px">Télécharger</a>
+                                             <a href="{{ path('front_security_login') }}" class="download-file btn-concours" style="padding-left:26px">Télécharger le document</a>
                                          </div>
                                          <div class="col-md-6">
                                              <a href="{{ path('front_security_login') }}" class="download-file btn-concours" style="padding-left:26px">Démarrer le Quiz</a>

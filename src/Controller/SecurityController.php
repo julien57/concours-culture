@@ -18,23 +18,36 @@ class SecurityController extends AbstractController
     /**
      * @Route("/connexion-inscription", name="front_security_login")
      */
-    public function subscriptionLogin(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder, AuthenticationUtils $authenticationUtils)
+    public function subscriptionLogin(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $encoder, AuthenticationUtils $authenticationUtils, \Swift_Mailer $mailer)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user,['csrf_protection' => false])->handleRequest($request);
 
-        $formForgot = $this->createForm(ForgotPasswordType::class)->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
 
             $user->setRoles(["ROLE_USER"]);
-            $passwordEncoded = $encoder->encodePassword($user, $user->getPassword());
+            $password = uniqid();
+            $passwordEncoded = $encoder->encodePassword($user, $password);
             $user->setPassword($passwordEncoded);
 
             $em->persist($user);
             $em->flush();
 
-            $this->addFlash('notice', 'Merci pour votre inscription, vous pouvez maintenant vous connecter.');
+            $message = (new \Swift_Message('ConcoursCulture - Confirmation inscription'))
+                ->setFrom('contact@concoursculture.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'front/mail/subscription.html.twig',
+                        ['password' => $password, 'user' => $user]
+                    ),
+                    'text/html'
+                )
+            ;
+
+            $mailer->send($message);
+
+            $this->addFlash('notice', 'Merci pour votre inscription, vous pouvez maintenant vous connecter avec votre mot de passe provisoire envoyé par mail.');
             return $this->redirectToRoute('front_security_login');
         }
 

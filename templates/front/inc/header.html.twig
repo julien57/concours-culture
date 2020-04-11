@@ -5,7 +5,7 @@
             {% if app.user %}
                 <a href="{{ path('front_space_quiz') }}"><i class="fa fa-user"></i><b>Mon espace</b></a>
             {% else %}
-                <a href="{{ path('front_security_login') }}"><i class="fa fa-user"></i><b>INSCRIPTION / CONNEXION</b></a>
+                <a href="{{ path('front_security_login') }}"><i class="fa fa-user"></i><b style="font-size:14px">INSCRIPTION / CONNEXION</b></a>
             {% endif %}
             <div class="top-icons">
                 <ul>
@@ -15,7 +15,7 @@
                             title="Facebook"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
                 </ul>
-                <h5>{% if time_quiz.quizInCurse %}<span>QUIZZ EN COURS JUSQUE : </span>{{ time_quiz.quizInCurse.quizInCurse|date('H:i') }}{% elseif time_quiz.nextQuiz %}<span>PROCHAIN CONCOURS : </span>{{ time_quiz.nextQuiz.nextQuiz|format_datetime('full', 'short', locale='fr') }}{% else %}AUCUN CONCOURS PREVU PROCHAINEMENT{% endif %}</h5>
+                <h5>{% if time_quiz.quizInCurse %}<span>QUIZ EN COURS JUSQUE : </span>{{ time_quiz.quizInCurse.quizInCurse|date('H:i') }}{% elseif time_quiz.nextQuiz %}<span>PROCHAIN CONCOURS : </span>{{ time_quiz.nextQuiz.nextQuiz|format_datetime('full', 'short', locale='fr') }}{% else %}AUCUN CONCOURS PRÉVU PROCHAINEMENT{% endif %}</h5>
             </div>
         </div>
     </div><!-- Top Header /- -->

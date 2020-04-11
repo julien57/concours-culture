@@ -14,7 +14,7 @@
                     <h2>Mon Espace</h2>
                     <div class="row">
                         <div class="col-md-6">
-                            <h4 style="margin-bottom:30px">Mes participations aux Quiz</h4>
+                            <h4 style="margin-bottom:30px">Mes participations aux concours</h4>
                             {% for quiz in quizs %}
                                 <div class="modal fade" id="{{ quiz.theme }}{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                             {% else %}
-                                <p>Vous n'avez participez à aucun Quiz pour le moment.</p>
+                                <p>Vous n'avez participez à aucun concours pour le moment.</p>
                             {% endfor %}
                         </div>
                         <div class="col-md-6">
@@ -90,6 +90,13 @@
                                     <label style="color:white">Adresse mail * :</label>
                                     {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
                                     {{ form_errors(form.email) }}
+                                    <div style="margin-top:30px"></div>
+                                    <label style="color:white">Nouveau mot de passe :</label>
+                                    {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(form.password.first) }}
+                                    <div style="margin-top:10px"></div>
+                                    {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+                                    {{ form_errors(form.password.second) }}
                                     <button class="btn btn-warning" type="submit" style="margin-top:30px;">Enregistrer</button>
                                     {{ form_end(form) }}
                                 </div>

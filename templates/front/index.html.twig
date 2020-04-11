@@ -19,7 +19,7 @@
                         <h2>Présentation</h2>
                     </div>
                 </div><!-- Section Header /- -->
-                <p>ConcoursCulture vous propose des concours de culture générale sous forme de questionnaires. Le gagnant d’un concours remporte le prix mis en jeu. En vue d’une stricte égalité des chances, le thème du concours ainsi qu’un bref document d’apprentissage est mis à disposition avant le concours.
+                <p>ConcoursCulture vous propose des concours de culture générale sous forme de questionnaires. Le gagnant d’un concours remporte le prix mis en jeu. En vue d’une stricte égalité des chances, le thème du concours ainsi qu’un bref document d’apprentissage est mis à disposition avant le concours. Concours Culture est une initiative citoyenne et participative. Elle est donc entièrement gratuite.
                 <br>Parmi nos thèmes :
                 </p>
                 <ul>
@@ -30,37 +30,6 @@
             </div>
         </div><!-- Container /- -->
     </div><!-- Onview Section /- -->
-    <div class="padding-50"></div>
-
-    <div class="container">
-        <div class="contact-info">
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <i><img src="{{ asset('front/images/particulier.svg') }}" alt="Particulier" style="height:50px"></i>
-                <h3>Vous êtes un particulier</h3>
-                <p>Aidez-nous financièrement !
-                    Afin de motiver les gens à développer leur culture générale, nous offrons des prix aux gagnants. Mais cela a un coût !<br>
-                    <span>Lien en cours de création</span>
-                </p>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <i><img src="{{ asset('front/images/entreprise.svg') }}" alt="Entreprise" style="height:50px"></i>
-                <h3>Vous êtes une entreprise</h3>
-                <p>Aidez-nous matériellement !
-                    Si vous désirez faire la promotion d’un produit, vous pouvez le proposer comme prix d’un de nos concours, quelle qu’en soit sa valeur.<br>
-                    <a href="{{ path('front_contact') }}" class="download-file btn-concours">Nous contacter</a>
-                </p>
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                <i><img src="{{ asset('front/images/passion.svg') }}" alt="Passionné" style="height:50px"></i>
-                <h3>Vous êtes un passionné</h3>
-                <p>Aidez-nous avec vos compétences !
-                    Si vous êtes un professionnel ou un simple passionné, n’hésitez pas à nous proposer vos compétences pour élaborer nos concours.<br>
-                    <a href="{{ path('front_contact') }}" class="download-file btn-concours">Nous contacter</a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="padding-50 mt-5"></div>
 
     <div class="container-fluid no-padding upcoming-event">
         <div class="container-fluid no-padding" style="width:100%;height:100%;background:rgba(255,255,255,0.5)">
@@ -118,8 +87,52 @@
             </div>
         </div>
         </div><!-- Container /- -->
-
         <div class="section-padding" style="background:rgba(255,255,255,0.5)"></div>
-    </div><!-- Upcoming Events /- -->
+    </div>
+    <div class="padding-50 mt-5"></div>
+
+    <div class="container">
+        <div class="contact-info">
+            <h2 style="margin-bottom:50px;">Comment nous aider</h2>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <i><img src="{{ asset('front/images/particulier.svg') }}" alt="Particulier" style="height:50px"></i>
+                <h3>Vous êtes un particulier</h3>
+                <p>Aidez-nous financièrement !<br>
+                    Afin de motiver les gens à développer leur culture générale, nous offrons des prix aux gagnants. Mais cela a un coût !<br>
+                    <span>Lien en cours de création</span>
+                </p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <i><img src="{{ asset('front/images/entreprise.svg') }}" alt="Entreprise" style="height:50px"></i>
+                <h3>Vous êtes une entreprise</h3>
+                <p>Aidez-nous matériellement !<br>
+                    Si vous désirez faire la promotion d’un produit culturel ou non, vous pouvez le proposer comme prix d’un de nos concours, quelle qu’en soit sa valeur.<br>
+                    <a href="{{ path('front_contact') }}" class="download-file btn-concours">Nous contacter</a>
+                </p>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <i><img src="{{ asset('front/images/passion.svg') }}" alt="Passionné" style="height:50px"></i>
+                <h3>Vous êtes un passionné</h3>
+                <p>Aidez-nous avec vos compétences !<br>
+                    Si vous êtes un professionnel ou un simple passionné, n’hésitez pas à nous proposer vos compétences pour élaborer nos concours.<br>
+                    <a href="{{ path('front_contact') }}" class="download-file btn-concours">Nous contacter</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="padding-50 mt-5"></div>
+
+    <div class="container">
+        <div class="col-md-6 col-sm-6" style="margin:auto;float:none">
+            <!-- Section Header -->
+            <div class="section-header2">
+                <i><img src="{{ asset('front/images/section-header2-1.png') }}" alt="Qui sommes-nous"></i>
+                <span>Qui</span>
+                <h2>Sommes-Nous ?</h2>
+            </div><!-- Section Header /- -->
+            <p style="text-align: justify">Concours-Culture est une initiative citoyenne née d’un groupe de jeunes passionnés de culture générale. Notre initiative a pour but de vous faire partager notre passion pour la culture. Afin de donner à tout le monde sa chance, nous avons conçu un système particulier : au lieu de proposer un concours destiné aux seuls personnes déjà à l’aise en culture générale, nous proposons aux participants d’améliorer leur culture avant de participer au concours. Pas bête non ?</p>
+        </div>
+    </div>
+    <div class="padding-50 mt-5"></div>
 
 {% endblock %}
