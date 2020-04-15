@@ -57,7 +57,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $user->setRoles(["ROLE_ADMIN"]);
-            $passwordNew = $user->getPassword();
+            $passwordNew = uniqid();
             $passwordEncoded = $encoder->encodePassword($user, $passwordNew);
             $user->setPassword($passwordEncoded);
 

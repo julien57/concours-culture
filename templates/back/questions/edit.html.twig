@@ -62,7 +62,7 @@
             // with a number that's unique to your emails
             // end name attribute looks like name="contact[emails][2]"
             newWidget = newWidget.replace(/__name__/g, counter);
-            newWidget = `<div id="question_responses_${counter}"><div><label for="question_responses_${counter}_response" class="required">Response ${counter + 1} :</label><input type="text" id="question_responses_${counter}_response" class="form-control" name="question[responses][${counter}][response]" required="required" maxlength="255" /></div></div>`;
+            newWidget = `<div id="question_responses_${counter}"><div><label for="question_responses_${counter}_response" class="required">Réponse ${counter + 1}</label><input type="text" id="question_responses_${counter}_response" name="question[responses][${counter}][response]" required="required" class="form-control" /></div><div><div class="custom-control custom-checkbox"><input type="checkbox" id="question_responses_${counter}_isGood" name="question[responses][${counter}][isGood]" required="required" class="custom-control-input" /><label class="custom-control-label required" for="question_responses_${counter}_isGood">Bonne réponse ?</label></div></div></div>`;
             // Increase the counter
             counter++;
             // And store it, the length cannot be used if deleting widgets is allowed

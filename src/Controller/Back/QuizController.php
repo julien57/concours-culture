@@ -100,7 +100,6 @@ class QuizController extends AbstractController
                 $quiz->setDocument($documentName);
             }
 
-
             /** @var Question $question */
             foreach ($form->get('questions')->getData() as $question) {
                $quiz->addQuestion($question);
@@ -116,5 +115,16 @@ class QuizController extends AbstractController
             'form' => $form->createView(),
             'quiz' => $quiz
         ]);
+    }
+
+    /**
+     * @Route("/quiz/supprimer/{id}", name="back_quiz_remove")
+     */
+    public function remove(Quiz $quiz)
+    {
+        $this->em->remove($quiz);
+        $this->em->flush();
+
+        return $this->redirectToRoute('back_quiz_list');
     }
 }

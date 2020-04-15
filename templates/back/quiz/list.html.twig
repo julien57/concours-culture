@@ -75,7 +75,7 @@
                                             </i>
                                             Editer
                                         </a>
-                                        <a class="btn btn-danger btn-sm" href=""  onclick="return confirm('Attention ! Etes-vous sûr de vouloir supprimer cette question ?');">
+                                        <a class="btn btn-danger btn-sm" href="{{ path('back_quiz_remove', {'id': quiz.id}) }}"  onclick="return confirm('Attention ! Etes-vous sûr de vouloir supprimer cette question ?');">
                                             <i class="fas fa-trash">
                                             </i>
                                             Supprimer

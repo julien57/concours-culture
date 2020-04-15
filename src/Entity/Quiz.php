@@ -49,7 +49,7 @@ class Quiz
     private $theme;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="quiz")
+     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="quiz", cascade={"remove"})
      */
     private $results;
 
@@ -136,32 +136,6 @@ class Quiz
     }
 
     /**
-     * @return Collection|Question[]
-     */
-    public function getQuestions(): Collection
-    {
-        return $this->questions;
-    }
-
-    public function addQuestion(Question $question): self
-    {
-        if (!$this->questions->contains($question)) {
-            $this->questions[] = $question;
-        }
-
-        return $this;
-    }
-
-    public function removeQuestion(Question $question): self
-    {
-        if ($this->questions->contains($question)) {
-            $this->questions->removeElement($question);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Result[]
      */
     public function getResults(): Collection
@@ -200,6 +174,34 @@ class Quiz
     public function setGift(?Gift $gift): self
     {
         $this->gift = $gift;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Question[]
+     */
+    public function getQuestions(): Collection
+    {
+        return $this->questions;
+    }
+
+    public function addQuestion(Question $question): self
+    {
+        if (!$this->questions->contains($question)) {
+            $this->questions[] = $question;
+            $question->addQuiz($this);
+        }
+
+        return $this;
+    }
+
+    public function removeQuestion(Question $question): self
+    {
+        if ($this->questions->contains($question)) {
+            $this->questions->removeElement($question);
+            $question->removeQuiz($this);
+        }
 
         return $this;
     }

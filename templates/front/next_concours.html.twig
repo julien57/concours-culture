@@ -28,7 +28,7 @@
         <!-- Container -->
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-sm-6 content-block" style="margin:auto;float:none">
+                <div class="col-md-8 col-sm-6 content-block" style="margin:auto;float:none">
                     {% if concoursInCurse is null %}
                         {% if nextConcours %}
                             <!-- Section Header -->
@@ -56,7 +56,7 @@
                                 </li>
                             </ul>
 
-                            <p>Le prochain concours sera sur le suivant : <strong>{{ nextConcours.title }}</strong>. Pour vous y préparer, vous pouvez télécharger le document suivant. Chacune des réponses demandées se trouve dans le document, ou dans les références auxquelles il renvoie.</p>
+                            <p>Le prochain concours sera sur le sujet suivant : <strong>{{ nextConcours.title }}</strong>. Pour vous y préparer, vous pouvez télécharger le document ci-dessous. Chacune des réponses demandées se trouve dans le document, ou dans les références auxquelles il renvoie.</p>
                             <p>Avant de participer au concours, merci de prendre connaissance des <a data-toggle="modal" data-target=".bd-example-modal-lg" style="cursor:pointer">règles et modalités</a>.</p>
                             {% if app.user %}
                                 <a href="{{ asset(constant('App\\Service\\File::DOCUMENT_UPLOAD_DIR') ~ nextConcours.document) }}" target="_blank" class="download-file">Télécharger le document</a>
@@ -76,16 +76,16 @@
                         <div class="section-header2">
                             <i><img src="{{ asset('front/images/section-header2-1.png') }}" alt="Section Header"></i>
                             <span>Quiz en cours</span>
-                            <h2>Un quiz est en cours jusque {{ concoursInCurse.atFinish|date('H:i') }}</h2>
+                            <h2>Un quiz est en cours jusqu'à {{ concoursInCurse.atFinish|date('H:i') }}</h2>
                         </div>
                             {% if concoursInCurse is not null %}
-                                <p>Le concours qui est en train de se dérouler est sur le thème <strong>{{ concoursInCurse.theme }}</strong>.<br>
-                                    Pour vous y préparer, vous pouvez télécharger le document suivant. Chacune des réponses demandées se trouve dans le document, ou dans les références auxquelles il renvoie.<br>
+                                <p>Le concours qui est en train de se dérouler est sur le sujet suivant : <strong>{{ concoursInCurse.title }}</strong>.<br>
+                                    Pour vous y préparer, vous pouvez télécharger le document ci-dessous. Chacune des réponses demandées se trouve dans le document, ou dans les références auxquelles il renvoie.<br>
                                 Avant de participer au concours, merci de prendre connaissance des <a data-toggle="modal" data-target=".bd-example-modal-lg" style="cursor:pointer">règles et modalités</a>.</p>
                                 <div class="row">
                                     {% if app.user %}
                                         {% if userPlayed %}
-                                            <p>Vous avez déjà participé à ce Quiz.</p>
+                                            <p>Vous avez déjà participé à ce concours.</p>
                                         {% else %}
                                         <div class="col-md-6">
                                             <a href="{{ asset(constant('App\\Service\\File::DOCUMENT_UPLOAD_DIR') ~ concoursInCurse.document) }}" target="_blank" class="download-file btn-concours" style="padding-left:26px">Télécharger le document</a>
@@ -104,7 +104,7 @@
                                     {% endif %}
                                 </div>
                             {% else %}
-                                <p>Pour télécharger ce document, vous devez créer gratuitement un compte. La participation au concours sera également gratuite. Concours-Culture est une initiative entièrement gratuite et citoyenne, destinée à la promotion de la culture générale. </p>
+                                <p>Pour télécharger ce document, vous devez créer gratuitement un compte. La participation au concours sera également gratuite. ConcoursCulture est une initiative entièrement gratuite et citoyenne, destinée à la promotion de la culture générale. </p>
                                 <a href="{{ path('front_security_login') }}"  class="download-file">Me connecter ou m'inscrire</a>
                             {% endif %}
                     {% endif %}

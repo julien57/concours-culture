@@ -69,7 +69,8 @@ class QuizType extends AbstractType
                 'class' => Question::class,
                 'choice_label' => 'question',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
+                'by_reference' => false
             ])
             ->add('gift', EntityType::class, [
                 'class' => Gift::class,

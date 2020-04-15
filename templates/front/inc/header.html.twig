@@ -9,13 +9,10 @@
             {% endif %}
             <div class="top-icons">
                 <ul>
-                    <li><a class="fb-share-button"
-                           data-href="https://www.concoursculture.com"
-                           data-layout="button_count"
-                            title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="https://www.facebook.com/ConcoursCulturecom-100333878321105/" target="_blank"><i class="fa fa-facebook"></i></a></li>
                     <li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
                 </ul>
-                <h5>{% if time_quiz.quizInCurse %}<span>QUIZ EN COURS JUSQUE : </span>{{ time_quiz.quizInCurse.quizInCurse|date('H:i') }}{% elseif time_quiz.nextQuiz %}<span>PROCHAIN CONCOURS : </span>{{ time_quiz.nextQuiz.nextQuiz|format_datetime('full', 'short', locale='fr') }}{% else %}AUCUN CONCOURS PRÉVU PROCHAINEMENT{% endif %}</h5>
+                <h5>{% if time_quiz.quizInCurse %}<span>QUIZ EN COURS JUSQU'À </span>{{ time_quiz.quizInCurse.quizInCurse|date('H:i') }}{% elseif time_quiz.nextQuiz %}<span>PROCHAIN CONCOURS : </span>{{ time_quiz.nextQuiz.nextQuiz|format_datetime('full', 'short', locale='fr') }}{% else %}AUCUN CONCOURS PRÉVU PROCHAINEMENT{% endif %}</h5>
             </div>
         </div>
     </div><!-- Top Header /- -->

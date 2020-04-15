@@ -18,7 +18,7 @@
                         <input type="email" name="forgot" class="form-control" id="forgot">
                         <input type="hidden" name="token" value="{{ csrf_token('forgot-pwd') }}"/>
                         <div id="responseForgot"></div>
-                        <button id="btn_submit" type="submit" class="download-file btn-concours forgot_btn">Se connecter</button>
+                        <button id="btn_submit" type="submit" class="download-file btn-concours forgot_btn">Recevoir mon nouveau mot de passe</button>
                     </form>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <div class="contact-form">
                         <h3>Inscription</h3>
                         <p style="text-align:justify;text-transform: initial;font-size:0.9em;font-family:'PT Serif', serif">L’inscription à ConcoursCulture et la participation aux
-                            concours sont entièrement gratuites. Concours-Culture est une initiative citoyenne,
+                            concours sont entièrement gratuites. ConcoursCulture est une initiative citoyenne,
                             destinée à la promotion de la culture générale. </p>
                         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                             <div class="row">

@@ -33,6 +33,20 @@ class QuizRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
+    public function APINextConcours()
+    {
+        $dateNow = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $dateNow->format('Y-m-d H:i');
+
+        return $this->createQueryBuilder('q')
+            ->where('q.atDate > :now')
+            ->setParameter('now', $dateNow)
+            ->orderBy('q.atDate', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     public function nextConcoursWithGift()
     {
         $dateNow = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
@@ -59,6 +73,18 @@ class QuizRepository extends ServiceEntityRepository
             ->setParameter('now', $dateNow)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function APIConcoursInCurse()
+    {
+        $dateNow = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $dateNow->format('Y-m-d H:i');
+
+        return $this->createQueryBuilder('q')
+            ->where(':now BETWEEN q.atDate AND q.atFinish')
+            ->setParameter('now', $dateNow)
+            ->getQuery()
+            ->getArrayResult();
     }
 
     public function getByTheme()

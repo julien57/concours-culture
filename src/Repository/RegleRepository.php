@@ -19,6 +19,14 @@ class RegleRepository extends ServiceEntityRepository
         parent::__construct($registry, Regle::class);
     }
 
+    public function APIGetRegles()
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.id', 'ASC')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
     // /**
     //  * @return Regle[] Returns an array of Regle objects
     //  */

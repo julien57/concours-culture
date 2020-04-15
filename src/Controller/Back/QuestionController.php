@@ -53,7 +53,6 @@ class QuestionController extends AbstractController
         $form = $this->createForm(QuestionType::class, $question)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             foreach ($question->getResponses() as $response) {
                 $response->setQuestion($question);
                 $response->setSlug($slugger->slug($response->getResponse()));
@@ -80,7 +79,7 @@ class QuestionController extends AbstractController
         $form = $this->createForm(QuestionType::class, $question)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+        
             foreach ($question->getResponses() as $response) {
                 $response->setQuestion($question);
                 $response->setSlug($slugger->slug($response->getResponse()));

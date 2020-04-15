@@ -51,7 +51,7 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="user", cascade={"remove"})
      */
     private $results;
 
